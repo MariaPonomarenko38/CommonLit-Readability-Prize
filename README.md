@@ -1,6 +1,13 @@
 # CommonLit-Readability-Prize
 
 <h2> Stage 1 </h2>
+
+<h3> Output files </h3>
+<ul>
+<li> <code> models/model.bin </code> contains final trained model. </li>
+<li> <code> metrics.json </code> contains metrics obtained during training and validation. </li>
+</ul>
+
 <h3> Information on how to reproduce the solution </h3>
 <ol>
   <li>
