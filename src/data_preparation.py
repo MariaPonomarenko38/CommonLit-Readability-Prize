@@ -4,6 +4,10 @@ import re
 import torch
 from torch.nn.utils.rnn import pad_sequence
 import pickle
+import os
+from pathlib import Path
+import sys
+import config
 
 tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+')
 
@@ -20,7 +24,7 @@ def transform_to_sequences(text_series, vocab_exists=False):
     word2index = {}
     sequences = []
     if vocab_exists:
-        with open('../word2index.pkl', 'rb') as fp:
+        with open(config.VOCAB_PATH, 'rb') as fp:
             word2index = pickle.load(fp)
         
         for text in text_series:
@@ -36,6 +40,6 @@ def transform_to_sequences(text_series, vocab_exists=False):
     padded_sequences = [torch.LongTensor(seq) for seq in sequences]
     padded_sequences = pad_sequence(padded_sequences, batch_first=True)
     if vocab_exists is False:
-        with open('../word2index.pkl', 'wb') as fp:
+        with open(config.VOCAB_PATH, 'wb') as fp:
             pickle.dump(word2index, fp)
     return padded_sequences, len(word2index)

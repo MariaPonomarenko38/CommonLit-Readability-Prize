@@ -14,8 +14,6 @@ import nltk
 from dataset import TextDataset
 import json
 
-import sys
-sys.path.append('../')
 import config
 
 def process_data(data_path):
@@ -70,5 +68,5 @@ if __name__ == '__main__':
             torch.save(model.state_dict(), config.OUTPUT_PATH)
             best_loss = avg_val_loss
 
-        with open('../metrics.json', 'w') as f:
+        with open(config.METRICS_PATH, 'w') as f:
             json.dump(results, f)
