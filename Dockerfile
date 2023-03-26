@@ -1,6 +1,6 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 
-COPY ./requirements_light.txt /app/requirements.txt
+COPY ./requirements_deploy.txt /app/requirements.txt
 
 RUN pip install --upgrade -r /app/requirements.txt
 
