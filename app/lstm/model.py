@@ -8,6 +8,7 @@ class LSTMModel(nn.Module):
         self.num_layers = num_layers
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
         self.lstm = nn.LSTM(embedding_dim, hidden_size, num_layers, batch_first=True)
+        self.dropout = nn.Dropout(0.3)
         self.fc = nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
@@ -15,5 +16,6 @@ class LSTMModel(nn.Module):
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         out, _ = self.lstm(embedded, (h0, c0))
+        out = self.dropout(out)
         out = self.fc(out[:, -1, :])
         return out

@@ -8,9 +8,9 @@ def train_loop(model, train_loader, criterion, optimizer, device):
         inputs = inputs.to(device)
         targets = targets.to(device)
         
-        optimizer.zero_grad()
+        model.zero_grad()
         outputs = model(inputs)
-        loss = criterion(outputs, targets)
+        loss = criterion(outputs.squeeze(), targets)
         
         loss.backward()
         optimizer.step()

@@ -55,7 +55,7 @@ if __name__ == '__main__':
         avg_train_loss = total_loss / total_batches
 
         model.eval()
-        total_val_loss, total_val_rmse, total_val_batches = val_loop(model, train_loader, criterion, device)
+        total_val_loss, total_val_rmse, total_val_batches = val_loop(model, val_loader, criterion, device)
         
         avg_val_loss = total_val_loss / total_val_batches
         avg_val_rmse = total_val_rmse / total_val_batches
@@ -67,8 +67,8 @@ if __name__ == '__main__':
         results['val_rmse'].append(avg_val_rmse)
         
         if total_val_loss < best_loss:
-            torch.save(model.state_dict(), f"{BASE_DIR}/../models/model.bin")
+            torch.save(model.state_dict(), f"{BASE_DIR}/../models/model_lstm.bin")
             best_loss = avg_val_loss
 
-        with open(f"{BASE_DIR}/../metrics.json", 'w') as f:
+        with open(f"{BASE_DIR}/metrics_lstm.json", 'w') as f:
             json.dump(results, f)
