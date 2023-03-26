@@ -7,25 +7,23 @@ import sys
 #from app.src.model import LSTMModel
 #import app.src.config as config
 from pathlib import Path
-from predict import *
+import pickle
 
 app = FastAPI()
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent
 
-'''
-def process_single_entry(text):
-    text_series = pd.Series([text])
-    padded_sequences, vocab_size = transform_to_sequences(text_series, True)
-    return padded_sequences, vocab_size
+with open(f"{BASE_DIR}/linear_regression_model.pkl", 'rb') as file:
+    model = pickle.load(file)
 
-def predict(sequences, vocab_size):
-    model = LSTMModel(vocab_size, config.EMB_DIM, config.HIDDEN_SIZE, config.NUM_LAYERS, config.OUTPUT_SIZE)
-    model.load_state_dict(torch.load(f"{BASE_DIR}/../models/model.bin"))
-    model.eval()
-    outputs = model(sequences).squeeze()
-    return outputs
-'''
+with open(f"{BASE_DIR}/count_vectorizer.pkl", 'rb') as file:
+    vectorizer = pickle.load(file)
+
+def predict(text):
+    X_new = vectorizer.transform([text])
+    y_pred = model.predict(X_new)
+    return y_pred[0]
+
 class UserRequestIn(BaseModel):
     text: str
 
