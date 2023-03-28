@@ -32,7 +32,7 @@
    </li>
    <li>
     Go to <code>app/linear_regression </code> directory to train linear model or
-    Go to <code>app/lstm </code> directory to train linear model.
+    Go to <code>app/lstm </code> directory to train LSTM model.
    </li>
   <li>
      Run <code>train.py</code> command to train the model.
