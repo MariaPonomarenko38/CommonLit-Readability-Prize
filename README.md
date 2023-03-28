@@ -31,7 +31,7 @@
     <pre> pip install -r requirements.txt </pre>
    </li>
    <li>
-    Go to <code>app/linear_regression </code> directory to train linear model or
+    Go to <code>app/linear_regression </code> directory to train linear model <b>or</b>
     Go to <code>app/lstm </code> directory to train LSTM model.
    </li>
   <li>
